@@ -1,6 +1,6 @@
 # Intro
 
-`kicks` is more or less simple helper for setting up a workstation for development.
+`kicks` is more or less simple helper for setting up a windows workstation for development.
 
 # Setup Windows Server 2022
 
@@ -21,3 +21,13 @@ Now run
 to install the actual script and then start
 
     pip -m kicks
+
+# Troubleshooting
+
+## CWD
+
+Make sure to start `kicks` when yo are in your homedir, nowhere else. It will create a subfolder `_kicks` and some of the logics depend on that!
+
+## User
+
+Works only with user `Administrator`.
