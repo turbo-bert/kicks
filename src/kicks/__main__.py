@@ -95,9 +95,9 @@ if x == "b":
     with open(os.path.join(bindir, 'dcx.bat'), 'w') as f:
         f.write('python -m kicks')
 
-    #e / emacs
+    #ee / emacs
     with open(os.path.join(bindir, 'ee.bat'), 'w') as f:
-        f.write('%s -nw %%*' % (os.path.join(home, '_kicks', 'e', 'bin', 'emacs')))
+        f.write('set SHELL=c:\\windows\\system32\\cmdproxy.exe\r\n%s -nw %%*' % (os.path.join(home, '_kicks', 'e', 'bin', 'emacs')))
 
     #e / sublime
     with open(os.path.join(bindir, 'e.bat'), 'w') as f:
