@@ -24,10 +24,6 @@ to install the actual script and then start
 
 # Troubleshooting
 
-## CWD
-
-Make sure to start `kicks` when yo are in your homedir, nowhere else. It will create a subfolder `_kicks` and some of the logics depend on that!
-
 ## User
 
 Works only with user `Administrator`.
