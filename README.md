@@ -22,6 +22,8 @@ to install the actual script and then start
 
     pip -m kicks
 
+Take a look at main option `b` to make your life easier when working with `cmd.exe`.
+
 # Troubleshooting
 
 ## User
