@@ -31,3 +31,7 @@ Make sure to start `kicks` when yo are in your homedir, nowhere else. It will cr
 ## User
 
 Works only with user `Administrator`.
+
+# Financial Support Appreciated
+
+Feel free to use https://www.paypal.com/donate/?hosted_button_id=4EZE2QKKG29JE
