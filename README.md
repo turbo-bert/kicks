@@ -2,6 +2,8 @@
 
 `kicks` is more or less simple helper for setting up a windows workstation for development. It is written in python and hosted on pypi. So using this it's always A) Installing a python intepreter B) Installing the pypi package.
 
+You could also just use https://github.com/turbo-bert/kicks/blob/main/src/kicks/__main__.py as your source of inspiration and manually do your tasks.
+
 # Setup Windows Server 2022
 
 As `Administrator` (but WITHOUT ELEVATION) in a `cmd.exe` commandline, run:
