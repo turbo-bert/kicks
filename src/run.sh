@@ -2,3 +2,4 @@
 
 
 vp -m kicks "$@"
+rm -fr _kicks
