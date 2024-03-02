@@ -28,6 +28,10 @@ Take a look at main option `b` to make your life easier when working with `cmd.e
 
 # Troubleshooting
 
+## No Administrator Privileges Needed
+
+Don't elevate your `cmd.exe` via UAC. All tasks can be done (and should be) as normal Administrator.
+
 ## User
 
 Works only with user `Administrator`.
