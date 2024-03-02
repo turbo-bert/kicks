@@ -14,7 +14,7 @@ CONSOLE = Console()
 
 home = os.getenv("USERPROFILE")
 
-OP="_kicks"
+OP=os.path.join(home, "_kicks")
 OD=os.makedirs(OP, exist_ok=True)
 
 def tryversion(pkg):
@@ -53,7 +53,10 @@ t.add_section()
 t.add_row("q", "QUIT")
 
 while True:
-    CONSOLE.clear()
+    CONSOLE.print("")
+    CONSOLE.print("")
+    CONSOLE.print("")
+    CONSOLE.print("")
     CONSOLE.print(t)
 
     x = CONSOLE.print()
@@ -241,7 +244,8 @@ while True:
         subprocess.call(cmd, shell=True)
         run_confirm = CONSOLE.input('run it? type "run" to execute or anything else to exit # ')
         if run_confirm == "run":
-            subprocess.call(outfile, shell=True)
+            cy_dir=os.makedirs(os.path.join(home, '_kicks', 'cy'), exist_ok=True)
+            subprocess.call("""%s -l %s -P %s""" % (outfile, cy_dir, "nc,mc,ncdu"), shell=True)
 
     if x == "12":
         outfile = os.path.join(OP, "gitsetup.exe")
