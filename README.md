@@ -1,6 +1,6 @@
 # Intro
 
-`kicks` is more or less simple helper for setting up a windows workstation for development.
+`kicks` is more or less simple helper for setting up a windows workstation for development. It is written in python and hosted on pypi. So using this it's always A) Installing a python intepreter B) Installing the pypi package.
 
 # Setup Windows Server 2022
 
