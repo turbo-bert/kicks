@@ -42,4 +42,5 @@ Feel free to use https://www.paypal.com/donate/?hosted_button_id=4EZE2QKKG29JE
 
 # TODO
 
+- [x] Get rid of the CWD local _kicks directory
 - [ ] Get rid of the username limitation
