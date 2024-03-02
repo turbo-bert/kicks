@@ -39,3 +39,7 @@ Works only with user `Administrator`.
 # Financial Support Appreciated
 
 Feel free to use https://www.paypal.com/donate/?hosted_button_id=4EZE2QKKG29JE
+
+# TODO
+
+[ ] Get rid of the username limitation
