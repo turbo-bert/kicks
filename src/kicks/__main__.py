@@ -1,16 +1,25 @@
 import requests
 import time
 import os
-import rich
 import subprocess
+
+import rich
 from rich.pretty import pprint as PP
 from rich.console import Console
 from rich.table import Table
+CONSOLE = Console()
 
 # written by robert degen
 # 2015-2024
+# notes:
+# c:\cygwin64\bin\mintty.exe -w max -s 80x25  -e python -m dcx
+# vs code / xdebug php extension + devsense php extension
+# windows server 2022:
+# https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022
+# https://info.microsoft.com/ww-landing-windows-server-2022.html
+# https://www.microsoft.com/de-de/evalcenter/download-windows-server-2022
+# US ISO https://software-static.download.prss.microsoft.com/sg/download/888969d5-f34g-4e03-ac9d-1f9786c66749/SERVER_EVAL_x64FRE_en-us.iso
 
-CONSOLE = Console()
 
 home = os.getenv("USERPROFILE")
 
@@ -40,15 +49,16 @@ t.add_section()
 t.add_row("1", "firefox windows 64", "3", "docker windows")
 t.add_row("2", "chrome windows 64", "6", "virtualbox")
 t.add_section()
-t.add_row("4", "process explorer")
-t.add_row("5", "vc_redist")
-t.add_row("7", "grml small iso")
+t.add_row("4", "process explorer", "wp", "latest wordpress")
+t.add_row("5", "vc_redist", "www", "WP->htdocs (req:wp)")
+t.add_row("7", "grml small iso", "2k22", "windows server 2022 en iso")
 t.add_row("8", "fpc win64")
-t.add_row("9", "sublime")
+t.add_row("9", "sublime", "npp", "notepad plus plus")
 t.add_row("10", "emacs")
 t.add_row("11", "cygwin")
-t.add_row("12", "git")
+t.add_row("12", "git", "is", "inno setup")
 t.add_row("13", "xampp")
+t.add_row("14", "visual studio code", "15", "LibreOffice")
 t.add_section()
 t.add_row("q", "QUIT")
 
@@ -166,6 +176,23 @@ while True:
             subprocess.call("""%s""" % os.path.join(outzipdir, "Installers", "GoogleChromeStandaloneEnterprise64.msi"), shell=True)
             #subprocess.call("""explorer %s""" % (outzipdir), shell=True)
 
+    if x == "wp":
+        outfile = os.path.join(OP, "wp.zip")
+        outzipdir = os.path.join(OP, "wp")
+        cmd = 'curl -C - -L -o "%s" "https://wordpress.org/latest.zip"' % outfile
+        subprocess.call(cmd, shell=True)
+        run_confirm = CONSOLE.input('run it? type "run" to execute or anything else to exit # ')
+        if run_confirm == "run":
+            subprocess.call("""powershell -Command Expand-Archive -Path '%s' -DestinationPath '%s'""" % (outfile, outzipdir), shell=True)
+            subprocess.call("""explorer %s""" % (outzipdir), shell=True)
+
+    #todo:
+    if x == "www":
+        outfile = os.path.join(OP, "wp.zip")
+        outzipdir = os.path.join(OP, "wp", "wordpress")
+        htdir = os.path.join('C:\\', 'xampp', 'htdocs')
+        subprocess.call("""robocopy %s %s /MIR""" % (outzipdir, htdir), shell=True)
+
     if x == "3":
         outfile = os.path.join(OP, "docker-setup.exe")
         cmd = 'curl -C - -L -o "%s" "https://desktop.docker.com/win/main/amd64/Docker%%20Desktop%%20Installer.exe"' % outfile
@@ -206,6 +233,12 @@ while True:
         #https://download.grml.org/grml64-small_2024.02.iso
         outfile = os.path.join(OP, "grml.iso")
         cmd = 'curl -C - -L -o "%s" "https://download.grml.org/grml64-small_2024.02.iso"' % outfile
+        subprocess.call(cmd, shell=True)
+        subprocess.call("""explorer %s""" % (OP), shell=True)
+
+    if x == "2k22":
+        outfile = os.path.join(OP, "grml.iso")
+        cmd = 'curl -C - -L -o "%s" "https://go.microsoft.com/fwlink/p/?LinkID=2195280&clcid=0x409&culture=en-us&country=US"' % outfile
         subprocess.call(cmd, shell=True)
         subprocess.call("""explorer %s""" % (OP), shell=True)
 
@@ -255,6 +288,22 @@ while True:
         if run_confirm == "run":
             subprocess.call(outfile, shell=True)
 
+    if x == "is":
+        outfile = os.path.join(OP, "innosetup.exe")
+        cmd = 'curl -C - -L -o "%s" "https://jrsoftware.org/download.php/is.exe?site=2"' % outfile
+        subprocess.call(cmd, shell=True)
+        run_confirm = CONSOLE.input('run it? type "run" to execute or anything else to exit # ')
+        if run_confirm == "run":
+            subprocess.call(outfile, shell=True)
+
+    if x == "npp":
+        outfile = os.path.join(OP, "nppsetup.exe")
+        cmd = 'curl -C - -L -o "%s" "https://github.com/notepad-plus-plus/notepad-plus-plus/releases/download/v8.6.4/npp.8.6.4.Installer.x64.exe"' % outfile
+        subprocess.call(cmd, shell=True)
+        run_confirm = CONSOLE.input('run it? type "run" to execute or anything else to exit # ')
+        if run_confirm == "run":
+            subprocess.call(outfile, shell=True)
+
     if x == "13":
         outfile = os.path.join(OP, "xamppsetup.exe")
         cmd = 'curl -C - -L -o "%s" "https://sourceforge.net/projects/xampp/files/XAMPP%%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe"' % outfile
@@ -262,6 +311,23 @@ while True:
         run_confirm = CONSOLE.input('run it? type "run" to execute or anything else to exit # ')
         if run_confirm == "run":
             subprocess.call(outfile, shell=True)
+
+    if x == "14":
+        outfile = os.path.join(OP, "vsc.exe")
+        cmd = 'curl -C - -L -o "%s" "https://code.visualstudio.com/sha/download?build=stable&os=win32-x64-user"' % outfile
+        subprocess.call(cmd, shell=True)
+        run_confirm = CONSOLE.input('run it? type "run" to execute or anything else to exit # ')
+        if run_confirm == "run":
+            subprocess.call(outfile, shell=True)
+
+    if x == "15":
+        #https://www.libreoffice.org/download/download-libreoffice/?type=win-x86_64&version=7.6.5&lang=en-US
+        outfile = os.path.join(OP, "libre765.msi")
+        cmd = 'curl -C - -L -o "%s" "https://ftp.fau.de/tdf/libreoffice/stable/7.6.5/win/x86_64/LibreOffice_7.6.5_Win_x86-64.msi"' % outfile
+        subprocess.call(cmd, shell=True)
+        run_confirm = CONSOLE.input('run it? type "run" to execute or anything else to exit # ')
+        if run_confirm == "run":
+            subprocess.call("%s /passive /qr" % outfile, shell=True)
 
     if x == "q":
         break
